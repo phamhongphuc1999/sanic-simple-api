@@ -30,7 +30,7 @@ rundev:
 
 ## Build and run mysql container. | Build and deploy
 builddata:
-	docker-compose -f docker-compose-mysql.yaml up --buid
+	docker-compose -f docker-compose-mysql.yaml up -d
 
 ## Build sanic image
 buildimage:
@@ -65,3 +65,7 @@ help:
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
 	@echo ''
+
+## Help cli | Utils
+execdata:
+	docker exec -it sanic-simple-api_mysql_container_1 bash
