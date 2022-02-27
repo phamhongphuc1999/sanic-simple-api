@@ -1,14 +1,14 @@
-from sanic import Blueprint, json
+from sanic import json
 
-from sanic_app.sanic_app import main_app
+from sanic_app.sanic_app import user_blueprint
 
 
 class UserController:
-    def __init__(self, user_blueprint: Blueprint):
-        self._user_blueprint = user_blueprint
+    def __init__(self):
+        pass
 
-    @main_app.get("/register")
-    async def register_user(self, request):
+    @user_blueprint.get("/register")
+    async def register_user(self):
         try:
             return json({'hello': 'world'})
         except Exception as error:

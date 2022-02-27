@@ -12,17 +12,33 @@ TARGET_MAX_CHAR_NUM = 20
 virtual:
 	python3 -m venv /venv
 
-## Install packages
-install:
-	pip3 install -r requirements.txt
+## Install packages with production environment.
+installpro:
+	pip3 install -r requirements/production.txt
 
-## Run sanic api. | Run and deploy
-run:
-	python3 main.py
+## Install packages with development environment.
+installdev:
+	pip3 install -r requirements/development.txt
 
-## Build and run mysql container
+## Run sanic api with production environment. | Run project
+runpro:
+	python3 main.py production
+
+## Run sanic api with development environment.
+rundev:
+	python3 main.py development
+
+## Build and run mysql container. | Build and deploy
 builddata:
-	docker-compose up -f docker-compose-mysql.yaml
+	docker-compose -f docker-compose-mysql.yaml up --buid
+
+## Build sanic image
+buildimage:
+	docker build . -t sanic_app:v1
+
+## Run docker container.
+rundocker:
+	docker run -d -p 8000:8000 trava_api:v1
 
 ## Shows help. | Help
 help:
