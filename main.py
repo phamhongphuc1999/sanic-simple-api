@@ -1,6 +1,5 @@
 from sanic_app.config import EnvironmentType, GlobalAppConfig
 from sanic_app.config.extension_config import USER_ROUTER
-from sanic_app.factory.database import database_factory
 from sanic_app.sanic_app import main_app, create_routes
 from sanic_app.services.options import setup_options
 from sanic_app.services.sanic_cors import add_cors_headers
@@ -16,11 +15,10 @@ def run_server(auto_reload=False):
 
 
 if __name__ == "__main__":
-    database_factory.get_connector()
-    # _ENV = get_environment()
-    # if _ENV == EnvironmentType.PRODUCTION:
-    #     run_server()
-    # elif _ENV == EnvironmentType.DEVELOPMENT:
-    #     run_server(True)
-    # else:
-    #     print(f"Not found {_ENV}, process is stopped")
+    _ENV = get_environment()
+    if _ENV == EnvironmentType.PRODUCTION:
+        run_server()
+    elif _ENV == EnvironmentType.DEVELOPMENT:
+        run_server(True)
+    else:
+        print(f"Not found {_ENV}, process is stopped")
