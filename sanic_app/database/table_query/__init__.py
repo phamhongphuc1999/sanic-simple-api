@@ -1,11 +1,9 @@
-from mysql.connector import CMySQLConnection
-
-from sanic_app.database.table_query.user_query import _UserQuery
+from sanic_app.database.table_query.employee_query import _EmployeeQuery
 
 
 class TableQuery:
-    def __init__(self, cursor: CMySQLConnection):
-        self._user = _UserQuery(cursor)
+    def __init__(self, connection):
+        self._user = _EmployeeQuery(connection)
 
     def user_query(self):
         return self._user

@@ -9,5 +9,8 @@ class DatabaseFactory:
     def get_query(self):
         if self._base_query is None:
             _base_connector = BaseConnector()
-            self._base_query = TableQuery(_base_connector.get_cursor())
+            connection = _base_connector.connect()
+            if connection is None:
+                raise Exception("Connection to database is Fall")
+            self._base_query = TableQuery(_base_connector.get_connection())
         return self._base_query
