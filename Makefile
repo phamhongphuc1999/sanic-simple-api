@@ -1,4 +1,4 @@
-PROJECT_NAME=trava_api_v1
+PROJECT_NAME=sanic_simple_api
 
 # colors
 GREEN = $(shell tput -Txterm setaf 2)
@@ -12,13 +12,9 @@ TARGET_MAX_CHAR_NUM = 20
 virtual:
 	python3 -m venv /venv
 
-## Install packages with production environment.
-installpro:
-	pip3 install -r requirements/production.txt
-
-## Install packages with development environment.
-installdev:
-	pip3 install -r requirements/development.txt
+## Install packages.
+install:
+	pip3 install -r requirements.txt
 
 ## Run sanic api with production environment. | Run project
 runpro:
@@ -27,18 +23,6 @@ runpro:
 ## Run sanic api with development environment.
 rundev:
 	python3 main.py development
-
-## Build and run mysql container. | Build and deploy
-builddata:
-	docker-compose -f docker-compose-mysql.yaml up -d
-
-## Build sanic image
-buildimage:
-	docker build . -t sanic_app:v1
-
-## Run docker container.
-rundocker:
-	docker run -d -p 8000:8000 trava_api:v1
 
 ## Shows help. | Help
 help:
@@ -65,7 +49,3 @@ help:
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
 	@echo ''
-
-## Help cli | Utils
-execdata:
-	docker exec -it sanic-simple-api_mysql_container_1 bash

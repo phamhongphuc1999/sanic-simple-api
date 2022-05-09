@@ -1,22 +1,19 @@
-from sanic_app.config import EnvironmentType, GlobalAppConfig
-from sanic_app.config.extension_config import EMPLOYEE_ROUTER
-from sanic_app.factory.database import database_factory
-from sanic_app.sanic_app import main_app, create_routes
-from sanic_app.services.options import setup_options
-from sanic_app.services.sanic_cors import add_cors_headers
-from sanic_app.services.utils import get_environment
+from app import create_app, create_routes, AppConfig
+
+from app.config import EnvironmentType
+from app.services.logger_service import app_logger
 
 
 def run_server(auto_reload=False):
-    create_routes(employee=EMPLOYEE_ROUTER)
-    main_app.register_listener(setup_options, "before_server_start")
-    main_app.register_middleware(add_cors_headers, "response")
-    main_app.run(host=GlobalAppConfig.AppConfig.APP_HOST, port=GlobalAppConfig.AppConfig.APP_PORT,
-                 auto_reload=auto_reload, debug=True, access_log=True)
+    sanic_app = create_app()
+    create_routes(employee=AppConfig.Extension.EMPLOYEE_ROUTER)
+    app_logger.info(f"environment: {AppConfig.Environment}")
+    sanic_app.run(host=AppConfig.Global.App.HOST, port=AppConfig.Global.App.PORT, auto_reload=auto_reload, debug=False,
+                  access_log=True, workers=4)
 
 
 if __name__ == "__main__":
-    _ENV = get_environment()
+    _ENV = AppConfig.Environment
     if _ENV == EnvironmentType.PRODUCTION:
         run_server()
     elif _ENV == EnvironmentType.DEVELOPMENT:

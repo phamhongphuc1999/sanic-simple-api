@@ -2,7 +2,7 @@ import mysql.connector
 from mysql.connector import errorcode
 from sanic.log import logger
 
-from sanic_app.config import GlobalAppConfig
+from app.config import AppConfig
 
 
 class BaseConnector:
@@ -11,11 +11,11 @@ class BaseConnector:
 
     def connect(self):
         try:
-            _host = GlobalAppConfig.MySQLConfig.HOST
-            _port = GlobalAppConfig.MySQLConfig.PORT
-            _user_name = GlobalAppConfig.MySQLConfig.USER_NAME
-            _password = GlobalAppConfig.MySQLConfig.PASSWORD
-            _database = GlobalAppConfig.MySQLConfig.DATABASE_NAME
+            _host = AppConfig.Global.SQL.HOST
+            _port = AppConfig.Global.SQL.PORT
+            _user_name = AppConfig.Global.SQL.USER_NAME
+            _password = AppConfig.Global.SQL.PASSWORD
+            _database = AppConfig.Global.SQL.DATABASE_NAME
             self._connection = mysql.connector.connect(host=_host, user=_user_name, password=_password,
                                                        database=_database)
             logger.info(f"Connected - host: {_host}, port: {_port}")
