@@ -5,8 +5,6 @@ from app.config import AppConfig
 from app.controllers.employee_controller import employee_blueprint
 from app.misc.log import log
 
-main_app = Sanic(AppConfig.Global.App.APP_NAME)
-
 
 def _register_extensions(sanic_app: Sanic):
     from app import extensions
@@ -33,7 +31,7 @@ def create_app(*config_cls) -> Sanic:
     return sanic_app
 
 
-def create_routes(**kwargs):
+def create_routes(sanic_app: Sanic, **kwargs):
     for key, value in kwargs.items():
         if key == "employee" and value:
-            main_app.blueprint(employee_blueprint)
+            sanic_app.blueprint(employee_blueprint)

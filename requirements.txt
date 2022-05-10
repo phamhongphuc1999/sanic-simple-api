@@ -1,4 +1,4 @@
-sanic==21.12.1
+sanic==21.9.1
 mysql-connector-python==8.0.28
 jsonschema==4.4.0
 PyJWT==2.3.0

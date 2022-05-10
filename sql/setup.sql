@@ -4,13 +4,30 @@ GO
 USE sanic_app;
 GO
 
-CREATE TABLE employees (
-    id INT IDENTITY(1,1) PRIMARY KEY,
+CREATE TABLE Employees (
+    id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL,
     password VARCHAR(100) NOT NULL,
-    email VARCHAR(50),
-)
+    email VARCHAR(50)
+);
 GO
 
-INSERT INTO employees (username, password, email)
-VALUES ("Pham Hong Phuc", "1167ff3cd1af7a3845fec8883f225300b970f004417f2a765c60ffbc5fac3b75", "php@gmail.com")
+INSERT INTO Employees (username, password, email)
+VALUES ('PhamHongPhuc', '123456789', 'php@gmail.com'),
+        ('PhamHongPhuc1', '123456789', 'php@gmail.com'),
+        ('PhamHongPhuc2', '123456789', 'php@gmail.com'),
+        ('PhamHongPhuc3', '123456789', 'php@gmail.com'),
+        ('PhamHongPhuc4', '123456789', 'php@gmail.com');
+GO
+
+CREATE TABLE Productions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(30) NOT NULL,
+    amount INT NOT NULL
+);
+GO
+
+INSERT INTO Productions (name, amount)
+VALUES ('production1', 100),
+        ('production2', 200),
+        ('production3', 1000);

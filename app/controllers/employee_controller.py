@@ -5,7 +5,7 @@ from app.apis.api_response import ok_json, bad_request_json
 from app.apis.api_wrapper import validate_body_with_json_schema
 from app.database.model_getter import ModelGetter
 
-employee_blueprint = Blueprint("user_blueprint")
+employee_blueprint = Blueprint("employee_blueprint", url_prefix="/user")
 
 
 @employee_blueprint.post("/register")
@@ -24,6 +24,6 @@ async def login_app(request):
         username = body["username"]
         password = body["password"]
         user_data = ModelGetter.get_model().user.get_employee_by_username_password(username, password)
-        return ok_json(user_data)
+        return ok_json({"data": user_data})
     except Exception as error:
         return bad_request_json(str(error))

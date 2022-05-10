@@ -20,8 +20,8 @@ if len(_args) < 2:
     raise Exception("environment is required")
 elif _args[1] == "development":
     _ENV = EnvironmentType.DEVELOPMENT
-elif _args[1] == "production":
-    _ENV = EnvironmentType.PRODUCTION
+elif _args[1] == "dev_docker":
+    _ENV = EnvironmentType.DEV_DOCKER
 else:
     raise Exception(f"Not found {_ENV}")
 
