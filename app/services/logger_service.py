@@ -12,7 +12,7 @@ def get_console_handler():
 
 
 def get_file_handler():
-    file_handler = RotatingFileHandler('logging.log', maxBytes=2000, backupCount=1)
+    file_handler = RotatingFileHandler('logging.log', maxBytes=2000)
     file_handler.setFormatter(FORMATTER)
     return file_handler
 

@@ -2,7 +2,7 @@ from typing import Union
 
 import mysql.connector
 from mysql.connector import errorcode, CMySQLConnection, MySQLConnection
-from mysql.connector.cursor_cext import CMySQLCursor
+from mysql.connector.cursor import MySQLCursor
 
 from app.config import AppConfig
 from app.services.logger_service import app_logger
@@ -36,7 +36,7 @@ class BaseConnector:
     def get_connection(self) -> Union[CMySQLConnection, MySQLConnection]:
         return self._connection
 
-    def get_cursor(self) -> CMySQLCursor:
+    def get_cursor(self) -> MySQLCursor:
         return self._connection.cursor()
 
     def close_connection(self):

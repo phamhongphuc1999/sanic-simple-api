@@ -19,4 +19,4 @@ if __name__ == "__main__":
     elif _ENV == EnvironmentType.DEVELOPMENT:
         run_server(True)
     else:
-        print(f"Not found {_ENV}, process is stopped")
+        app_logger.error(f"Not found {_ENV}, process is stopped")

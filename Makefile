@@ -8,17 +8,21 @@ RESET = $(shell tput -Txterm sgr0)
 GRAY = $(shell tput -Txterm setaf 6)
 TARGET_MAX_CHAR_NUM = 20
 
-## Create virtual environment. | Config.
-virtual:
-	python3 -m venv /venv
-
-## Install packages.
+## Install packages. | Config
 install:
 	pip3 install -r requirements.txt
 
 ## Run sanic api with development environment. | Run project.
 rundev:
-	python3 main.py development
+	./run_dev.sh
+
+## Run sanic api with production environment.
+runpro:
+	./run.sh -e $(environment)
+
+## Run sanic without docker.
+run:
+	python3 main.py $(environment)
 
 ## Shows help. | Help.
 help:

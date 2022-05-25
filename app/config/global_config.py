@@ -9,7 +9,7 @@ class GlobalConfig:
     class _App:
         def __init__(self, _env: EnvironmentType):
             self.NAME = "sanic_simple_api"
-            self.PORT = 3000
+            self.PORT = 8000
             self.HOST = '0.0.0.0'
 
     class _SQL:

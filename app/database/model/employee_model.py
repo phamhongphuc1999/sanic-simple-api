@@ -1,3 +1,4 @@
+import mysql.connector
 from sanic.log import logger
 
 from app.database.base_connector import BaseConnector
@@ -15,6 +16,8 @@ class _EmployeeModel:
             employee_data = _cursor.execute("SELECT * FROM Employees;")
             print("employee_data", employee_data)
             return employee_data
+        except mysql.connector.Error as error:
+            logger.error(str(error))
         except Exception as error:
             logger.error(str(error))
-            return None
+        return None
